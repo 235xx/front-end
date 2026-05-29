@@ -1,0 +1,306 @@
+日期（5.27）
+
+上午
+HTML-Elements/Attributes（标签与属性）
+
+html解析：浏览器如何处理标签
+DOM树的构建：将html文件丢给浏览器时，浏览器不会直接渲染成画面，经过HTML Parser，把字符解析成一个个对象，然后后构建成一棵DOM树。
+（引申）虚拟DOM：指用 JavaScript 对象来模拟真实 DOM 树的结构，1.用 JS 对象描述 DOM 2.通过 Diff 算法比较差异 3.批量更新真实 DOM   减少直接操作真实 DOM 的成本：真实 DOM 操作（尤其是重绘/重排）较慢，而 JS 对象操作极快，面试考过。
+解析阻塞：浏览器解析是自上而下的，当遇到<script>标签，浏览器会停止HTML的解析，先下载并执行脚本，故<script>放在<body>最底部，或者加上defer/async属性。
+
+Web Components：
+自定义标签：定义如<product-card>这样的标签---让HTML语义化且可复用
+核心技术：1.Custom Element：允许定义新的HTML标签。  2.Shadow DOM：把组件内部的 HTML 结构和 CSS 样式封装起来。 3.HTML Templates：使用 <template> 标签声明一段 HTML 片段，它在页面加载时不渲染，只有在需要时才被“激活”。
+
+Core（核心原则）
+Semantics语义化：语义化对 SEO（搜索引擎优化） 和代码可读性至关重要。
+HTML5语义化的好处（考过）：
+1. 提升搜索引擎优化（SEO）
+搜索引擎的爬虫会分析 HTML 标签来理解页面重点。语义标签能清晰地告诉爬虫哪里是导航、哪里是主体内容、哪里是侧边栏。
+2. 增强无障碍访问（可访问性）
+残障人士依赖屏幕阅读器等辅助技术浏览网页。语义标签为这些工具提供了内置的“提示”，使它们能正确朗读和导航页面。
+<nav> 告诉屏幕阅读器“这是导航区域”，用户可以直接跳转到导航。
+<button> 和 <a> 有天然的键盘交互支持；而用 <div> 模拟按钮则需要额外编写 JavaScript 和 ARIA 属性。
+语义化意味着更少的 ARIA 代码，且更不容易出错。
+
+A11Y（可访问性）：它关注如何让网页对所有人可用，包括视障人士（使用屏幕阅读器）或行动不便的用户。
+
+INFO
+display（显示）：这里指的是HTML元素默认的显示行为（块级元素 vs 行内元素），以及它们如何与CSS配合进行布局。
+multimedia（多媒体）：
+    ■ <video src="movie.mp4" controls></video>：支持播放、暂停、音量控制。
+    ■ <source> 标签可提供多格式备选，增强兼容性。
+    ■ <track> 标签用于添加字幕或章节，提升可访问性。
+canvas：
+<canvas> 是一个通过 JavaScript 绘制图形的容器，常用于：
+    ■ 数据可视化（如图表、仪表盘）
+    ■ 游戏开发
+    ■ 图像处理与动画
+
+Collection：
+form：用户输入与数据提交
+表单是用户与网页交互的核心入口，包含：
+    ■ 输入控件：<input>、<textarea>、<select> 等。
+    ■ 新增语义化元素：
+      ● <datalist>：为输入框提供自动补全建议。
+      ● <output>：显示计算结果或脚本输出。
+    ■ 表单验证：HTML5 支持 required、pattern 等属性，实现前端基础校验。
+表单数据通过 GET 或 POST 方法提交至服务器，是前后端数据交互的关键桥梁。
+下午
+deploy（部署）
+● Vercel / GithubPage：
+  ○ 这两个是目前最流行的静态网站托管服务。
+  ○ GitHub Pages：适合开源项目文档或个人博客，免费且直接绑定GitHub仓库。
+  ○ Vercel：现代前端部署的神器，支持自动CI/CD（持续集成/持续部署），保存代码后自动上线。
+
+Git常见命令学习
+一、基础操作命令
+# 克隆远程仓库
+git clone https://github.com/gongjuzu/insuraim-agent.git
+
+# 查看全局 Git 配置
+git config --list --global
+
+# 拉取更新
+git pull origin main
+
+# 查看工作区状态
+git status
+
+# 查看文件差异
+git diff              # 查看所有改动
+git diff <文件名>      # 查看指定文件改动
+git diff --cached     # 查看暂存区与版本库差异
+
+# 添加文件到暂存区
+git add <文件名>       # 添加指定文件
+git add .              # 添加所有改动文件
+git add -A             # 添加所有（包括删除）
+
+# 提交改动
+git commit -m "提交说明"
+git commit -am "提交说明"  # 跳过暂存，直接提交已追踪文件
+
+# 修改最后一次提交
+git commit --amend     # 修改提交信息或追加改动
+二、分支管理 
+1. 分支操作
+# 查看分支
+git branch             # 列出本地分支
+git branch -a          # 列出所有分支（含远程）
+
+# 创建分支
+git branch <分支名>
+
+# 切换分支
+git checkout <分支名>
+git switch <分支名>     # Git 2.23+ 推荐用法
+
+# 创建并切换分支
+git checkout -b <分支名>
+git switch -c <分支名>
+
+# 删除分支
+git branch -d <分支名>  # 删除本地分支
+git push origin --delete <分支名>  # 删除远程分支
+2.分支合并
+# 合并指定分支到当前分支
+git merge <分支名>
+
+# 查看合并冲突
+git status             # 查看冲突文件
+
+# 解决冲突后提交
+git add <冲突文件>
+git commit -m "解决合并冲突
+推送和拉取
+# 推送本地分支到远程
+git push origin <分支名>
+
+# 设置默认推送分支
+git push -u origin <分支名>
+
+# 拉取远程更新（自动合并）
+git pull origin <分支名>
+
+# 拉取远程更新（不合并）
+git fetch origin <分支名>
+
+# 强制推送（谨慎使用）
+git push -f origin <分支名>
+公司web端项目熟悉
+力扣刷题
+1.两数之和（Map）：
+map.has(key)指的是key。
+map.get(key)得到的是value
+map.set(key,values)
+var twoSum = function(nums, target) {
+    let map = new Map()
+    for(let i = 0;i<nums.length;i++){
+        if(map.has(target-nums[i])){
+            return [i,map.get(target-nums[i])]
+        }
+        map.set(nums[i],i)
+    }
+};
+2.字母异位词分组（Map）：
+var groupAnagrams = function(strs) {
+    let map = new Map()
+    for(let x of strs){
+        let a = Array.from(x)
+        a.sort()
+        let key = a.toString()
+        let list = map.get(key)?map.get(key):new Array()
+        list.push(x)
+        map.set(key,list)
+    }
+    return Array.from(map.values())
+};
+3.最长连续序列（Set）
+定义时里面可以放数组，去重
+var longestConsecutive = function(nums) {
+    let set = new Set(nums)
+    let ans = 0
+
+    for(let x of set){
+        if(set.has(x-1)) continue
+        let y = x+1
+        while(set.has(y)){
+            y++
+        }
+        ans = Math.max(y-x,ans)
+    }
+    return ans
+
+ };
+4.移动零（快慢指针）
+array.fill(数字,从该指引开始填满某数字)
+var moveZeroes = function(nums) {
+    let slow = 0
+
+    for(let fast = 0;fast <nums.length; fast++){
+        if(nums[fast]!==0){
+            nums[slow++]=nums[fast]
+        }
+    }
+    nums.fill(0,slow)
+};
+产品app讨论
+
+晚上
+html解析细谈
+github与git操作
+
+日期（5.28）
+上午
+力扣刷题
+5.盛最多的水（左右指针）
+var maxArea = function(height) {
+    let l = 0
+    let r = height.length-1
+    let ans = 0
+    while(l<r){
+        const area = (Math.min(height[l],height[r]))*(r-l)
+        
+        if(height[l]<height[r]) l++
+        else if(height[l]>=height[r]) r--
+        ans = Math.max(area,ans)
+    }
+    return ans
+};
+6.三数之和（for循环里面，再包含快慢指针）（三指针）
+var threeSum = function(nums) {
+    let ans = []
+    let len = nums.length
+    for(let i = 0; i<len;i++){
+        if(len < 3 || nums === null) break
+        nums.sort((a,b)=>a-b)
+        if(i>0 && nums[i]===nums[i-1]) continue
+        let L = i+1
+        let R = len-1
+        while(L<R){
+            const sum = nums[i] + nums[L] + nums[R]
+            if(sum === 0){
+                ans.push([nums[i],nums[L],nums[R]])
+                while(nums[L] === nums[L+1]) L++
+                while(nums[R] === nums[R-1]) R--
+                L++
+                R--
+            }
+            else if (sum<0) L++
+            else if (sum>0) R--
+        }
+
+    }
+    return ans
+};
+7.接雨水（双向双指针）
+var trap = function(height) {
+    let l = 0; let r = height.length-1;
+    let ans = 0; let subMax = 0; let preMax = 0;
+    while(l<r){
+        subMax = Math.max(height[r],subMax)
+        preMax = Math.max(height[l],preMax)
+        if(preMax > subMax){
+            ans += subMax - height[r]
+            r--
+        }else{
+            ans += preMax - height[l]
+            l++
+        }
+    }
+    return ans
+};
+下午
+力扣刷题
+8.无重复字符的最长子串（滑动窗口、双指针）
+var lengthOfLongestSubstring = function(s) {
+    let ans = 0
+    let left = 0
+    let map = new Map()
+    for(let right = 0;right<s.length;right++){
+        map.set(s[right],(map.get(s[right])??0)+1)
+        while(map.get(s[right])>1){
+            map.set(s[left],(map.get(s[left])-1))
+            left++   
+        }
+        ans = Math.max(ans,right-left+1)
+    }
+    return ans
+};
+9.找到字符串中所有字母异位词
+var findAnagrams = function(s, p) {
+    let sLen = s.length, pLen = p.length
+
+
+    if(sLen<pLen){
+        return []
+    }
+
+    let ans = []
+    let sCount = new Array(26).fill(0)
+    let pCount = new Array(26).fill(0)
+
+    for(let i = 0;i<pLen;i++){
+        sCount[s[i].charCodeAt() - 'a'.charCodeAt()]++
+        pCount[p[i].charCodeAt() - 'a'.charCodeAt()]++
+    }
+    if(sCount.toString()===pCount.toString()){
+        ans.push(0)
+    }
+
+    for(let i = 0; i < sLen - pLen; i++){
+        sCount[s[i].charCodeAt()-'a'.charCodeAt()]--
+        sCount[s[i+pLen].charCodeAt() - 'a'.charCodeAt()]++
+
+        if(sCount.toString()===pCount.toString()){
+        ans.push(i+1)
+    }
+    }
+    return ans
+    
+};
+日期（5.29）
+上午
+UTF-8
+UTF-8（8-bit Unicode Transformation Format）是一种针对 Unicode 的可变长度字符编码方案。简单来说，它是目前互联网上使用最广泛的“文字翻译官”，负责把人类使用的各种字符（如英文、中文、表情符号等）转换成计算机能够识别的二进制数据。
