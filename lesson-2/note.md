@@ -32,7 +32,26 @@ A11Y 指的是无论用户是否有身体、认知、听觉、视觉或运动障
 2课后作业 放图标
 
 3ARIA 自定义属性
+ARIA 自定义属性
+ARIA 自定义属性（常称为 ARIA 属性）实际上不是“自定义”的，而是一套由 W3C 标准定义的、以 aria- 开头的可访问性属性。开发者可以用它们来增强网页对残障人士（如使用屏幕阅读器）的可访问性。
+常见示例：
+<button aria-label="关闭" aria-hidden="false">X</button>
+<div role="dialog" aria-modal="true">...</div>
 
 4.EMMET
 https://emmet.io/
+Emmet 是一款前端开发效率工具，允许用简洁的缩写语法快速生成 HTML / CSS 代码，然后自动展开为完整的结构。
 
+示例：
+
+输入 div.container>ul>li.item*3 然后按 Tab 或展开键 → 生成：
+
+html
+<div class="container">
+  <ul>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+  </ul>
+</div>
+#header → <div id="header"></div>
