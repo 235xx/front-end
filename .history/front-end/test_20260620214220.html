@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>无缝滚动跑马灯</title>
+    <style>
+        /* 1. 滚动容器样式 */
+        .marquee-container {
+            width: 100%;
+            max-width: 400px; /* 【调整】放宽宽度，确保诗句能完整展示 */
+            overflow: hidden; /* 核心：隐藏超出容器的内容 */
+            position: relative;
+            white-space: nowrap; /* 核心：强制文本不换行 */
+            background-color: #f0f0f0;
+            padding: 10px 0;
+            border-radius: 8px;
+        }
+
+        /* 2. 滚动内容样式 */
+        .marquee-content {
+            display: inline-block; /* 核心：让内容可以被 transform 平移 */
+            animation: scroll-left 8s linear infinite; /* 【调整】速度放慢至 8s，阅读更舒适 */
+            will-change: transform; /* 性能优化：触发 GPU 硬件加速 */
+        }
+
+        /* 3. 利用伪元素无缝复制一份文本 */
+        .marquee-content::after {
+            content: attr(data-text); /* 读取 data-text 属性的值作为内容 */
+            padding-left: 3rem; /* 【微调】两段文本之间留出合适的间距 */
+        }
+
+        /* 4. 定义关键帧动画 */
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%); /* 移动总宽度的一半，实现无缝 */
+            }
+        }
+    </style>
+</head>
+<body style="padding: 50px; font-family: sans-serif;">
+
+    <!-- 滚动容器 -->
+    <div class="marquee-container">
+        <!-- data-text 属性中的文本需要与标签内的文本保持一致 -->
+        <span class="marquee-content" data-text="蜀道之难，难于上青天。蚕丛及鱼凫，开国何茫然。">
+            蜀道之难，难于上青天。蚕丛及鱼凫，开国何茫然。。
+        </span>
+    </div>
+
+</body>
+</html>

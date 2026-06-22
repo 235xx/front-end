@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>从右侧进入的无缝滚动</title>
+    <style>
+        /* 1. 滚动容器样式 */
+        .marquee-container {
+            width: 100%;
+            max-width: 300px; 
+            overflow: hidden; 
+            position: relative;
+            white-space: nowrap; 
+            background-color: #f0f0f0;
+            padding: 10px 0;
+            border-radius: 8px;
+        }
+
+        /* 2. 滚动内容样式 */
+        .marquee-content {
+            display: inline-block; 
+            animation: scroll-left 10s linear infinite; /* 稍微放慢到 10s，从右侧进入需要更多时间 */
+            will-change: transform; 
+        }
+
+        /* 3. 利用伪元素无缝复制一份文本 */
+        .marquee-content::after {
+            content: attr(data-text); 
+            padding-left: 3rem; 
+        }
+
+        /* 4. 定义关键帧动画（核心修改点） */
+        @keyframes scroll-left {
+            0% {
+                /* 【核心】从右侧进入：将文本向右平移 300px（即容器的 max-width） */
+                transform: translateX(300px); 
+            }
+            100% {
+                /* 移动总宽度的一半，实现无缝循环 */
+                transform: translateX(-50%); 
+            }
+        }
+    </style>
+</head>
+<body style="padding: 50px; font-family: sans-serif;">
+
+    <div class="marquee-container">
+        <span class="marquee-content" data-text="蜀道之难，难于上青天。蚕丛及鱼凫，开国何茫然。"></span>
+    </div>
+
+</body>
+</html>
