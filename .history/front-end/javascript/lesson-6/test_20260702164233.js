@@ -1,0 +1,12 @@
+const fs = require("fs")
+
+const path = require("path")
+
+const file = path.join(__dirname,'aaa.txt')
+
+fs.writeFileSync(file,'helloworld')
+
+console.log(__dirname);
+
+
+const app = document.getElementById("id")
