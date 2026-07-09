@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    console.log(String([1, 2, 3]));
+    console.log(String([]));
+    console.log(String({}));//"[object Object]",对象默认身份的字符串的表示
+    const user = {
+      name: "zhangsan"
+    }
+    console.log(JSON.stringify(user));
+
+    function add(){
+
+    }
+    console.log(Object.prototype.toString.call(function () {}));
+  </script>
+</body>
+</html>

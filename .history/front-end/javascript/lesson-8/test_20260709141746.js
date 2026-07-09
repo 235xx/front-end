@@ -1,0 +1,6 @@
+let a = String(123)
+let b = Number(123)
+let c = Boolean(123)
+console.log(typeof(a))
+console.log(typeof(b))
+console.log(c)
