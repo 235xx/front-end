@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>async function async1() {
+  console.log("async1 start");
+  await async2();
+  console.log("async1 end");//异步代码的微任务  Microtask queue
+}
+
+async function async2() {
+  console.log("async2");
+}
+
+console.log("script start");
+
+setTimeout(function () {
+  console.log("setTimeout");//异步代码的宏任务 Macrotask queue
+}, 0);
+
+async1();
+
+
+//生成一个Promise实例case
+new Promise(function (resolve) {
+  console.log("promise1");
+  resolve();
+}).then(function () {
+  console.log("promise2");//异步代码的微任务   Microtask queue
+});
+
+console.log("script end");</script>
+</body>
+</html>
