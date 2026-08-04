@@ -1,0 +1,102 @@
+//改变数组
+// 1.push 在末尾添加元素
+const arr1 = [1,2]
+const res1 = arr1.push(3)
+
+console.log(arr1);
+console.log(res1);//长度
+
+//2.pop，删除最后一个元素
+const arr2 = [1,2,3]
+const res2 = arr2.pop()
+console.log(arr2);
+console.log(res2);//删除的元素
+
+//shift()，在开头删除元素
+const arr3 = [1,2,3]
+const res3 = arr3.shift()
+console.log(arr3); //[2,3]
+console.log(res3);//删除的元素
+
+//unshift()，在开头添加元素
+const arr4 = [2,3]
+const res4 = arr4.unshift(1)
+console.log(arr4); // [1,2,3]
+console.log(res4); //长度
+
+//splice():从索引1开始删除2个元素，然后添加8,9
+const arr5 = [1,2,3,4]
+const res5 = arr5.splice(1,2,8,9)
+console.log(arr5);
+console.log(res5);
+
+//sort():排序
+const arr6 = [10,2,5]
+arr6.sort((a,b)=>a-b)
+console.log(arr6);
+
+//reverse():反转数组
+const arr7 = [1,2,3]
+arr7.reverse()
+console.log(arr7);
+
+//不改变原数组
+//1.concat():合并数组
+const a1 = [1,2]
+const result1 = a1.concat([3,4])
+console.log(result1);
+
+//slice(): 获取索引1到索引3之间的元素[1,3)
+const a2 = [1,2,3,4]
+const result2 = a2.slice(1,3)
+console.log(result2);
+
+//join()，将数组连接成字符串
+const a3 = ["张三","李四","王五"]
+const result3 = a3.join("-")
+console.log(result3);
+
+// map()，对每个元素进行处理
+const a4 = [1,2,3]
+const result4 = a4.map(item => item * 2)
+console.log(result4);
+
+//filter()， 筛选符合条件的元素
+const a5 = [1,2,3,4,5]
+const result5 = a5.filter(item => item>3)
+console.log(result5);
+
+//find(),返回第一个符合条件的元素
+const a6 = [
+  {id:1,name:"张三"},
+  {id:2,name:"李四"}
+]
+const result6 = a6.find(item =>item.id === 1)
+console.log(result6);
+
+//includes(),判断数组是否包含指定元素
+const a7 = ["苹果", "香蕉", "橙子"]
+console.log(a7.includes("香蕉"));
+console.log(a7.includes("西瓜"));
+
+//reduce(),累加器
+const players = [
+  { name: "梅西", team: "迈阿密国际" },
+  { name: "苏亚雷斯", team: "迈阿密国际" },
+  { name: "姆巴佩", team: "皇家马德里" },
+  { name: "贝林厄姆", team: "皇家马德里" }
+];
+
+const groupedPlayers = players.reduce((result, player) => {
+  const team = player.team;
+
+  if (!result[team]) {
+    result[team] = [];
+  }
+
+  result[team].push(player.name);
+
+  return result;
+}, {});
+
+console.log(groupedPlayers);

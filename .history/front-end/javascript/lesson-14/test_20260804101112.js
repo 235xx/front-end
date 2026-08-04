@@ -1,0 +1,4 @@
+const a =function foo(){
+
+}
+foo()
