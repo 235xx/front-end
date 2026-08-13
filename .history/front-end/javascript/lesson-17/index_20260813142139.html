@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id = "div">
+    helloworld
+  </div>
+  <a id = "a"></a>
+  <script>
+    //html标签的不同，浏览器会创建不同的类型
+    let div = document.getElementById('div')
+    Object.getPrototypeOf(div) === HTMLDivElement.prototype
+    console.log(Object.getPrototypeOf(div) === HTMLDivElement.prototype);
+    console.log(HTMLDivElement.prototype === HTMLElement.prototype);
+    console.log(HTMLElement.prototype === Element.prototype);
+    let a = document.getElementById('a')
+    Object.getPrototypeOf(div) === HTMLAnchorElement.prototype
+  </script>
+</body>
+</html>
