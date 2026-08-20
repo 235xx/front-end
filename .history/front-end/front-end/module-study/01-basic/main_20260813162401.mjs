@@ -1,0 +1,13 @@
+import Player, {
+  team,
+  competition,
+  pass as playerPass,
+  shoot
+} from "./football.mjs";
+
+const kane = new Player("凯恩", 60);
+
+console.log(kane.introduce());
+console.log(`球队：${team}，赛事：${competition}`);
+console.log(playerPass(kane.name));
+console.log(shoot(kane.name));
