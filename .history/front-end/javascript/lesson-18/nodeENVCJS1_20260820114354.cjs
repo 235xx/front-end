@@ -1,0 +1,25 @@
+// let ENV = "pro";
+// let config;
+// if (ENV === "pro") {
+//   const { config } = require("./a.json");
+// } else {
+//   const { config } = require("./b.json");
+// }
+// async function load() {
+//   const { a } = require("./nodeENVCJS2y.cjs");
+//   const { default: aJSON } = await import("./a.json", {
+//     with: { type: "json" },
+//   });
+
+//   console.log(a);
+//   console.log(aJSON);
+// }
+
+// load();
+const { count, addFun } = require("./nodeENVCJS2y.cjs");
+
+console.log(count); // 0，导出的值是一个快照，不论有没有进行操作
+
+addFun();
+
+console.log(count); // 0
